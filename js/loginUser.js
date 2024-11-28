@@ -1,6 +1,5 @@
 let loginForm = $('#loginUser');
 
-
 loginForm.on('submit', function (e) {
     let email = $('#loginEmail').val();
     let password = $('#loginPassword').val();
@@ -9,7 +8,7 @@ loginForm.on('submit', function (e) {
     let formData = {
         email: email,
         password: password
-    }
+    };
     const baseUrl = `${window.location.origin}${window.location.pathname.split('/').slice(0, -1).join('/')}`;
     const apiUrl = `${baseUrl}/API/loginUser.php`;
     $.ajax({
@@ -19,27 +18,29 @@ loginForm.on('submit', function (e) {
         data: JSON.stringify(formData),
         dataType: 'json',
         success: function (response) {
-            if (Array.isArray(response.errors) && response.errors.length > 0 && response.errors[0].error === true) {
-                const errorMessages = response.errors.map(err => `<p style="font-size: 20px; margin: 5px 0;">${err.message}</p>`).join('');
-                Swal.fire({
-                    title: 'Errors Occurred',
-                    html: errorMessages,
-                    icon: 'error'
-                });
-            } else {
-                $('#loginEmail').val('')
-                $('#loginPassword').val('')
+            if (response.success) {
                 Swal.fire({
                     title: 'Welcome',
-                    text: 'Successfully logged in',
+                    text: response.message,
                     icon: 'success'
                 }).then(() => {
-                    window.location.reload()
-                })
+                    window.location.reload();
+                });
+            } else if (response.errors) {
+                Swal.fire({
+                    title: 'Login Failed',
+                    text: response.errors.message,
+                    icon: 'error'
+                });
             }
         },
         error: function (err) {
-            console.log(err)
+            console.error('AJAX Error:', err);
+            Swal.fire({
+                title: 'Error',
+                text: 'An unexpected error occurred. Please try again.',
+                icon: 'error'
+            });
         }
-    })
-})
+    });
+});

@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/db_connection/db.php";
 require_once __DIR__ . "/classes/employees.php";
+require_once __DIR__ . "/classes/categories.php";
+require_once __DIR__ . "/classes/votes.php";
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }

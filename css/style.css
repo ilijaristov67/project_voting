@@ -1,0 +1,89 @@
+.banner {
+    height: 80vh;
+    background-image: url(../images/Parenta-Teamwork-And-Collaboration.jpg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+
+}
+.heading{
+    color: rgb(152, 119, 152);
+    font-size: 50px;
+}
+#logOut , #login{
+    background-color: rgba(179,192,224,255);
+    color:  white;
+}
+#register{
+    background-color: rgb(63,82,131);
+    color: white;
+}
+#vote {
+    background-color: rgb(63, 82, 131);
+    color: white;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+#vote:hover {
+    background-color: rgba(202,179,193,255);
+    color: white(179,192,224,255); 
+}
+.top-voter-card {
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.top-voter-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.voter-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.voter-category {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.vote-count {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #007bff;
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.loading {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #888;
+    padding: 50px;
+}
+
+@media (min-width: 992px) {
+    .top-voter-card {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-voter-card {
+        max-width: 100%;
+    }
+}
+

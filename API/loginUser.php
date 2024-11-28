@@ -25,7 +25,7 @@ $authenticatedUser = $user->authenticateUser();
 if ($authenticatedUser) {
     $_SESSION['email'] = $authenticatedUser['email'];
     $_SESSION['id'] = $authenticatedUser['id'];
-    echo json_encode(['success' => 'Login successful', 'user' => $authenticatedUser]);
+    echo json_encode(['success' => true, 'message' => 'Login successful', 'user' => $authenticatedUser]);
 } else {
-    echo json_encode(['errors' => 'Invalid email or password']);
+    echo json_encode(['success' => false, 'errors' => ['message' => 'Invalid email or password']]);
 }
