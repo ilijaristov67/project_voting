@@ -2,7 +2,6 @@
 
 class Vote
 {
-
     private $connection;
     private $voter_id;
     private $nominee_id;
@@ -57,6 +56,41 @@ class Vote
         $stmt = $connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);;
+    }
+
+    public function getTopVotedPeopleByCategory()
+    {
+        $connection = $this->getConnection();
+
+
+        $sqlCategories = "SELECT id, category FROM categories";
+        $categoriesStmt = $connection->prepare($sqlCategories);
+        $categoriesStmt->execute();
+        $categories = $categoriesStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $topVotedByCategory = [];
+
+
+        foreach ($categories as $category) {
+            $categoryId = $category['id'];
+            $sqlVotedPeople = "
+            SELECT e.first_name, e.last_name, COUNT(v.voter_id) AS vote_count 
+            FROM votes v 
+            JOIN employees e ON v.voter_id = e.id  -- Corrected to 'voter_id'
+            WHERE v.category_id = :category_id 
+            GROUP BY v.voter_id  -- Corrected to 'voter_id'
+            ORDER BY vote_count DESC 
+            LIMIT 5
+        ";
+
+            $stmt = $connection->prepare($sqlVotedPeople);
+            $stmt->bindParam(":category_id", $categoryId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $topVotedByCategory[$category['category']] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $topVotedByCategory;
     }
 
     /**
