@@ -62,6 +62,16 @@ class Employee
         return;
     }
 
+    public function getAllUsers()
+    {
+        $connection = $this->getConnection();
+        $sql = "SELECT * FROM employees";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     /**
      * Get the value of connection
      */
