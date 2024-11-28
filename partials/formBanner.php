@@ -1,5 +1,5 @@
 <div class="banner d-flex justify-content-center align-items-center">
-    <div class="formDiv w-25">
+    <div class="formDiv w-50">
         <form id="voteForm">
             <input type="hidden" id="currentUserId" value="<?php echo $_SESSION['id']; ?>">
 

@@ -15,6 +15,9 @@ require_once __DIR__ . "/partials/header.php";
     require_once __DIR__ . "/partials/scripts.php";
     ?>
     <script src="./js/voting.js"></script>
+    <?php
+    require_once __DIR__ . "/partials/footer.php";
+    ?>
 </body>
 
 </html>
